@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def group_view(request):
+    return render(request, 'group_view.html')
