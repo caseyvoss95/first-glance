@@ -4,36 +4,19 @@ import boto3
 from random import randint
 from .models import Photo, Person
 
-S3_BASE_URL = "https://s3.us-east-1.amazonaws.com"
-BUCKET = "first-glance"
-
 #todo: move me somewhere better
-names = ['John', 'Amy', 'Julie', 'Barbara']
-
+names = ['John', 'Bobby', 'Amy', 'Julie', 'Barbara']
+images = [
+    'https://images.generated.photos/RWgvMrrBsLFd8l-n8DRUpNswZF9A5qW2cN0qGUsnMps/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NzEyNTAzLmpwZw.jpg',
+    'https://images.generated.photos/7E8THeypJSdoTZ4xY1PXUae9vqWLpmwVhzcDms50nUM/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NzE1MDg0LmpwZw.jpg',
+    'https://images.generated.photos/1fhyHekdctHyc5xSl9VPxRD88zhU2b3C5O6ONBzXR8s/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MDUyNTEzXzAwMzU3/OTNfMDMwMjEwMi5q/cGc.jpg',
+]
 
 def group_view(request):
     
     Person.objects.all().delete()
     randName = names[randint(0,len(names) - 1)]
-    randomPerson = Person.objects.create(name=randName, imgPath='url')
+    randImg = images[randint(0, len(images) - 1)]
+    randomPerson = Person.objects.create(name=randName, imgPath=randImg)
     people = Person.objects.all()
     return render(request, 'person/detail.html', {'people': people} )
-
-def add_photo(request, person_id):
-    # photo-file will be the "name" attribute on the <input type="file">
-    photo_file = request.FILES.get('photo-file', None)
-    if photo_file:
-        s3 = boto3.client('s3')
-        # need a unique "key" for S3 / needs image file extension too
-        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-        # just in case something goes wrong
-        try:
-            s3.upload_fileobj(photo_file, BUCKET, key)
-            # build the full url string
-            url = f"{S3_BASE_URL}{BUCKET}/{key}"
-            # we can assign to cat_id or cat (if you have a cat object)
-            photo = Photo(url=url, person_id=person_id)
-            photo.save()
-        except:
-            print('An error occurred uploading file to S3')
-    return redirect('detail', person_id=person_id)

@@ -1,20 +1,11 @@
 {% extends 'base.html' %} {% block content%}
 
-{% for photo in person.photo_set.all %}
-<img class="responsive-img card-panel" src="{{photo.url}}">
-{% empty %}
-<div class="card-panel teal-text center-align">No Photos Uploaded</div>
-{% endfor %}
-
+<h1>Rember this face.</h1>
 
 {% for person in people %}
+<img src="{{ person.imgPath }}" alt="{{ person.name }}">
 <h1>{{ person.name }}</h1>
-
 {% endfor %}
 
-
-
-...
-<h1>Images are are gonna be here.</h1>
 
 {% endblock %}
