@@ -7,12 +7,13 @@ from .models import Photo, Person
 S3_BASE_URL = "https://s3.us-east-1.amazonaws.com"
 BUCKET = "first-glance"
 
+#todo: move me somewhere better
 names = ['John', 'Amy', 'Julie', 'Barbara']
 
 
 def group_view(request):
     
-
+    Person.objects.all().delete()
     randName = names[randint(0,len(names) - 1)]
     randomPerson = Person.objects.create(name=randName, imgPath='url')
     people = Person.objects.all()
