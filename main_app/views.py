@@ -1,23 +1,20 @@
 from django.shortcuts import render, redirect
 import uuid
 import boto3
-
+from random import randint
 from .models import Photo, Person
 
 S3_BASE_URL = "https://s3.us-east-1.amazonaws.com"
 BUCKET = "first-glance"
 
-class Simple:
-    def __init__(self, name, url):
-        self.name = name
-        self.url = url
-
-simples = [
-    Simple('Joe', 'myurl')
-]        
+names = ['John', 'Amy', 'Julie', 'Barbara']
 
 
 def group_view(request):
+    
+
+    randName = names[randint(0,len(names) - 1)]
+    randomPerson = Person.objects.create(name=randName, imgPath='url')
     people = Person.objects.all()
     return render(request, 'person/detail.html', {'people': people} )
 
