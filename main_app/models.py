@@ -9,4 +9,4 @@ class Person(models.Model):
 
 class Question(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    query = models.BooleanField(default=False)
+    query = models.CharField(max_length=200)

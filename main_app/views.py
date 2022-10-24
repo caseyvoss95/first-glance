@@ -25,13 +25,16 @@ def group_view(request):
 
 
 def quiz(request):
-    people = Person.objects.all()
     currentPerson = Person.objects.all()[0]
     question_form = QuestionForm()
-    
-    return render(request, 'person/quiz.html', {'people': people, 'question_form' : question_form} )
-
+    return render(request, 'person/quiz.html', {'currentPerson': currentPerson, 'question_form' : question_form} )
 
 def submit_answer(request):
-    print('submitting works')
+    print('SUBMITTING ANSWER NOW')
+    form = QuestionForm(request.POST)
+    if form.is_valid:
+        new_answer = form.save(commit=False)
+        new_answer.person_id = 114
+        new_answer.save()
+
     return redirect('quiz')

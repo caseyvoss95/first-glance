@@ -2,9 +2,7 @@
 
 <h1>who am i?</h1>
 
-{% for person in people %}
-<img src="{{ person.imgPath }}" alt="{{person.name}}">
-{% endfor %}
+<img src="{{ currentPerson.imgPath }}" alt="photo missing, try refreshing">
 
 <form action="{% url 'submit_answer' %}" method="post">
     {% csrf_token %} {{ question_form.as_p }}
