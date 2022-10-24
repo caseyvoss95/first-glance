@@ -27,8 +27,11 @@ def group_view(request):
 def quiz(request):
     people = Person.objects.all()
     currentPerson = Person.objects.all()[0]
-    choices = [currentPerson, 'Malik', 'Tara', 'Laura']
-    score = 0
     question_form = QuestionForm()
     
     return render(request, 'person/quiz.html', {'people': people, 'question_form' : question_form} )
+
+
+def submit_answer(request):
+    print('submitting works')
+    return redirect('quiz')

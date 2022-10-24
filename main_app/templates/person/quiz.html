@@ -6,8 +6,9 @@
 <img src="{{ person.imgPath }}" alt="{{person.name}}">
 {% endfor %}
 
-<form action="/foo">
+<form action="{% url 'submit_answer' %}" method="post">
     {% csrf_token %} {{ question_form.as_p }}
+    <input type="submit" value="next">
 </form>
 
 {% endblock %}
