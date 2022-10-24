@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import uuid
-import boto3
 from random import randint
-from .models import Photo, Person
+from .models import Person, Question
+from .forms import QuestionForm
 
 #todo: move me somewhere better
 names = ['John', 'Bobby', 'Amy', 'Julie', 'Barbara']
@@ -29,6 +29,6 @@ def quiz(request):
     currentPerson = Person.objects.all()[0]
     choices = [currentPerson, 'Malik', 'Tara', 'Laura']
     score = 0
+    question_form = QuestionForm()
     
-    
-    return render(request, 'person/quiz.html', {'people': people, 'choices': choices, 'score': score} )
+    return render(request, 'person/quiz.html', {'people': people, 'question_form' : question_form} )

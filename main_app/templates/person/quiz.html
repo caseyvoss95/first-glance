@@ -1,49 +1,14 @@
 {% extends 'base.html' %} {% block content%}
 
-
 <h1>who am i?</h1>
 
 {% for person in people %}
 <img src="{{ person.imgPath }}" alt="{{person.name}}">
 {% endfor %}
 
-
-<button id="choice0" >{{ choices.0 }}</button>
-<button id="choice1" >{{ choices.1 }}</button>
-<button id="choice2" >{{ choices.2 }}</button>
-<button id="choice3" >{{ choices.3 }}</button>
-
-<p>score:</p><p id="display"></p>
-
-
-<script>
-    console.log('script running')
-    
-    score = 0;
-    scoreDisplay = document.getElementById('display')
-    scoreDisplay.innerText = score;
-
-    choice0 = document.getElementById('choice0')
-    choice1 = document.getElementById('choice1')
-    choice2 = document.getElementById('choice2')
-    choice3 = document.getElementById('choice3')
-
-
-    choice0.addEventListener('click', function(){
-        score += 1;
-        scoreDisplay.innerText = score;
-     
-    })
-    choice1.addEventListener('click', function(){console.log('button 1 clicked')})
-    choice2.addEventListener('click', function(){console.log('button 2 clicked')})
-    choice3.addEventListener('click', function(){console.log('button 3 clicked')})
-
-
-
-
-
-</script>
-
+<form action="/foo">
+    {% csrf_token %} {{ question_form.as_p }}
+</form>
 
 {% endblock %}
 

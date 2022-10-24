@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 class Person(models.Model):
     name = models.CharField(max_length=50)
@@ -6,9 +7,6 @@ class Person(models.Model):
     def __str__(self):
         return self.name
 
-class Photo(models.Model):
-    url = models.CharField(max_length=200)
+class Question(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"Photo for person_id {self.person_id} @{self.url}"
+    query = models.BooleanField(default=False)
