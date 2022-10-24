@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 import uuid
 from random import randint
 from .models import Person, Question
@@ -14,12 +13,17 @@ images = [
     'https://images.generated.photos/1fhyHekdctHyc5xSl9VPxRD88zhU2b3C5O6ONBzXR8s/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MDUyNTEzXzAwMzU3/OTNfMDMwMjEwMi5q/cGc.jpg',
 ]
 
+
+
 def group_view(request):
     
     Person.objects.all().delete()
+    
+    #create random person with name - todo: iterate for more people!
     randName = names[randint(0,len(names) - 1)]
     randImg = images[randint(0, len(images) - 1)]
     Person.objects.create(name=randName, imgPath=randImg)
+    
     people = Person.objects.all()
     return render(request, 'person/detail.html', {'people': people} )
 
@@ -38,3 +42,6 @@ def submit_answer(request):
         new_answer.save()
 
     return redirect('quiz')
+
+def results(request):
+    return render(request, 'results.html')
