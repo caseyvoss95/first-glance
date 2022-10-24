@@ -35,10 +35,11 @@ def quiz(request):
 
 def submit_answer(request):
     print('SUBMITTING ANSWER NOW')
+    currentPersonID = Person.objects.all()[0].id
     form = QuestionForm(request.POST)
     if form.is_valid:
         new_answer = form.save(commit=False)
-        new_answer.person_id = 114
+        new_answer.person_id = currentPersonID
         new_answer.save()
 
     return redirect('quiz')
