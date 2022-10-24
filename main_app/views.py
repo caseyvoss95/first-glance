@@ -26,4 +26,9 @@ def group_view(request):
 
 def quiz(request):
     people = Person.objects.all()
-    return render(request, 'person/quiz.html', {'people': people} )
+    currentPerson = Person.objects.all()[0]
+    choices = [currentPerson, 'Malik', 'Tara', 'Laura']
+    
+    
+    
+    return render(request, 'person/quiz.html', {'people': people, 'choices': choices} )

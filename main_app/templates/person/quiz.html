@@ -1,6 +1,16 @@
 {% extends 'base.html' %} {% block content%}
 
-<h1>Quiz will appear here</h1>
+<h1>who am i?</h1>
+
+{% for person in people %}
+<img src="{{ person.imgPath }}" alt="{{person.name}}">
+{% endfor %}
+
+{% for choice in choices %}
+<p>{{ choice }}</p>
+{% endfor %}
+
+
 
 
 {% endblock %}
