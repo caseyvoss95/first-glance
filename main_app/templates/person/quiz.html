@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content%}
 
+
 <h1>who am i?</h1>
 
 {% for person in people %}
@@ -7,10 +8,18 @@
 {% endfor %}
 
 {% for choice in choices %}
-<p>{{ choice }}</p>
+<button id="choice" >{{ choice }}</button>
 {% endfor %}
 
 
 
+<script>
+    console.log('script running')
+    $button = document.getElementById('choice')
+    $button.addEventListener('click', function(){console.log('button clicked')})
+</script>
+
 
 {% endblock %}
+
+
