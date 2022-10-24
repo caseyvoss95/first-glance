@@ -19,7 +19,7 @@ def group_view(request):
     Person.objects.all().delete()
     randName = names[randint(0,len(names) - 1)]
     randImg = images[randint(0, len(images) - 1)]
-    randomPerson = Person.objects.create(name=randName, imgPath=randImg)
+    Person.objects.create(name=randName, imgPath=randImg)
     people = Person.objects.all()
     return render(request, 'person/detail.html', {'people': people} )
 
@@ -28,7 +28,7 @@ def quiz(request):
     people = Person.objects.all()
     currentPerson = Person.objects.all()[0]
     choices = [currentPerson, 'Malik', 'Tara', 'Laura']
+    score = 0
     
     
-    
-    return render(request, 'person/quiz.html', {'people': people, 'choices': choices} )
+    return render(request, 'person/quiz.html', {'people': people, 'choices': choices, 'score': score} )
