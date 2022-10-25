@@ -17,19 +17,19 @@ shuffle(options)
 
 class QuestionForm(ModelForm):
     
-    product_name = forms.ChoiceField(label='', choices=[], widget=forms.RadioSelect)
+    options = forms.ChoiceField(label='', choices=[], widget=forms.RadioSelect)
 
-    def __init__(self, products=None, *args, **kwargs):
+    def __init__(self, options=None, *args, **kwargs):
         super(QuestionForm, self).__init__(*args, **kwargs)
-        if products:
+        if options:
             batch = []
-            for product in products:
-                batch.append(product)
+            for option in options:
+                batch.append(option)
 
-            self.fields['product_name'].choices = batch
+            self.fields['options'].choices = batch
 
 
     person = Person.objects.all()[0]
     class Meta:
         model = Question
-        fields = ['query']
+        fields = []

@@ -3,6 +3,8 @@ import uuid
 from random import randint
 from .models import Person, Question
 from .forms import QuestionForm
+from random import shuffle
+
 
 #todo: move me somewhere better
 names = ['John', 'Bobby', 'Amy', 'Julie', 'Barbara']
@@ -29,13 +31,18 @@ def group_view(request):
 
 
 def quiz(request):
+    
+    currentPerson = Person.objects.all()[0]
+
+    
     options = [
-    ('0', 'BLUEBERRY'),
+    ('0', currentPerson),
     ('1', 'Larry Voss'),
     ('2', 'Mickey Narsisian'),
     ('3', 'Mary Lou')
 ]   
-    currentPerson = Person.objects.all()[0]
+    shuffle(options)
+
     question_form = QuestionForm(options)
     return render(request, 'person/quiz.html', {'currentPerson': currentPerson, 'question_form' : question_form} )
 
