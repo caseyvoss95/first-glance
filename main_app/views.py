@@ -29,8 +29,14 @@ def group_view(request):
 
 
 def quiz(request):
+    options = [
+    ('0', 'BLUEBERRY'),
+    ('1', 'Larry Voss'),
+    ('2', 'Mickey Narsisian'),
+    ('3', 'Mary Lou')
+]   
     currentPerson = Person.objects.all()[0]
-    question_form = QuestionForm()
+    question_form = QuestionForm(options)
     return render(request, 'person/quiz.html', {'currentPerson': currentPerson, 'question_form' : question_form} )
 
 def submit_answer(request):
@@ -40,6 +46,7 @@ def submit_answer(request):
     if form.is_valid:
         new_answer = form.save(commit=False)
         new_answer.person_id = currentPersonID
+        print(new_answer.query)
         new_answer.save()
 
     return redirect('quiz')
