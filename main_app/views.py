@@ -1,10 +1,14 @@
 from operator import truediv
 from django.shortcuts import render, redirect
-import uuid
 from random import randint
 from .models import Person, Question
 from .forms import QuestionForm
 from random import shuffle
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+
+
 
 
 #todo: move me somewhere better
@@ -22,7 +26,7 @@ images = [
 ]
 
 
-
+@login_required
 def group_view(request):
     
     Person.objects.all().delete()
@@ -30,12 +34,11 @@ def group_view(request):
     #create random person with name - todo: iterate for more people!
     randName = names[randint(0,len(names) - 1)]
     randImg = images[randint(0, len(images) - 1)]
-    Person.objects.create(name=randName, imgPath=randImg)
-    
+    newPerson = Person.objects.create(name=randName, imgPath=randImg)
     people = Person.objects.all()
     return render(request, 'person/detail.html', {'people': people} )
 
-
+@login_required
 def quiz(request):
     
     currentPerson = Person.objects.all()[0]
@@ -52,6 +55,7 @@ def quiz(request):
     question_form = QuestionForm()
     return render(request, 'person/quiz.html', {'currentPerson': currentPerson, 'question_form' : question_form} )
 
+@login_required
 def submit_answer(request):
     print('SUBMITTING ANSWER NOW')
     Question.objects.all().delete()
@@ -65,6 +69,7 @@ def submit_answer(request):
 
     return redirect('results')
 
+@login_required
 def results(request):
     answer = Question.objects.all()[0]
     currentPerson = Person.objects.all()[0]
@@ -75,3 +80,18 @@ def results(request):
         win = False
 
     return render(request, 'results.html', {'win': win})
+
+#special thanks to GA Markdown for this function
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)

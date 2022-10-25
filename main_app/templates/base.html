@@ -17,6 +17,14 @@
     <header class="navbar-fixed">
         <nav class="nav-wrapper indigo" role="navigation">
             <a id="logo-container" href="/" class="brand-logo">First Glance</a>
+            <ul class="left">
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}"> Log In</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
         </nav>
     </header>
     <main class="card-content valign center">
