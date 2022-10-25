@@ -43,20 +43,20 @@ def quiz(request):
 ]   
     shuffle(options)
 
-    question_form = QuestionForm(options)
+    question_form = QuestionForm()
     return render(request, 'person/quiz.html', {'currentPerson': currentPerson, 'question_form' : question_form} )
 
 def submit_answer(request):
     print('SUBMITTING ANSWER NOW')
     currentPersonID = Person.objects.all()[0].id
     form = QuestionForm(request.POST)
+    # print(form)
     if form.is_valid:
         new_answer = form.save(commit=False)
         new_answer.person_id = currentPersonID
-        print(new_answer.query)
         new_answer.save()
 
-    return redirect('quiz')
+    return redirect('results')
 
 def results(request):
     return render(request, 'results.html')
