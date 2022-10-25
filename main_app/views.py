@@ -8,12 +8,17 @@ from random import shuffle
 
 
 #todo: move me somewhere better
-names = ['John', 'Bobby', 'Amy', 'Julie', 'Barbara']
+names = ['Dorian', 'Amos', 'Flynn', 'Kori', 'Ellison', 'Harper', 'Wyatt', 'Asher']
 
 images = [
     'https://images.generated.photos/RWgvMrrBsLFd8l-n8DRUpNswZF9A5qW2cN0qGUsnMps/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NzEyNTAzLmpwZw.jpg',
     'https://images.generated.photos/7E8THeypJSdoTZ4xY1PXUae9vqWLpmwVhzcDms50nUM/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NzE1MDg0LmpwZw.jpg',
     'https://images.generated.photos/1fhyHekdctHyc5xSl9VPxRD88zhU2b3C5O6ONBzXR8s/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MDUyNTEzXzAwMzU3/OTNfMDMwMjEwMi5q/cGc.jpg',
+    'https://images.generated.photos/vJ2GZpArcKGX-fR26GBV8NwIIY61sdNcNJCuMKneQ1k/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MDU0MjY4XzA3NzE3/OThfMDc2NTUyMS5q/cGc.jpg',
+    'https://images.generated.photos/vXh97jjk8eIrd8d8t4Ei-SPSrQ7tVnh5uX0xc2iiQBw/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTk3MDQzLmpwZw.jpg',
+    'https://images.generated.photos/6AZE02WGr1kJvdJkpGndYH2G3LPcoZxIohIxL_ZrelY/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MjU5NTU1LmpwZw.jpg',
+    'https://images.generated.photos/RgdJ6UxHJyqOejDLu-QsA0Cds3eEgRnZNXSwFSz9pKQ/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NDE3NjEyLmpwZw.jpg',
+    'https://images.generated.photos/isEv8ypmyC47Dzn1WZLaLFGNQ__Zv-ok3SbXPRBIsqw/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTgxNjU0LmpwZw.jpg',
 ]
 
 

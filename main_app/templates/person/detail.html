@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block content%}
 
+{% load static %}
+
 <h1>Rember this face.</h1>
 
 {% for person in people %}
@@ -7,7 +9,7 @@
 <h1>{{ person.name }}</h1>
 {% endfor %}
 
-<a href="/quiz"><button>BEGIN</button></a>
+<a href="/quiz" class="btn indigo">BEGIN</a>
 
 
 {% endblock %}
