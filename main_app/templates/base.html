@@ -14,20 +14,21 @@
 </head>
 
 <body>
-    <nav class="light-blue lighten-1" role="navigation">
-        <a id="logo-container" href="#" class="brand-logo">First Glance</a>
-    </nav>
-
-    {% block content %}
-    {% endblock %}
-
+    <header class="navbar-fixed">
+        <nav class="nav-wrapper blue" role="navigation">
+            <a id="logo-container" href="#" class="brand-logo">First Glance</a>
+        </nav>
+    </header>
+    <main class="card-content valign center-block">
+        {% block content %}
+        {% endblock %}
+    </main>
     <footer class="page-footer orange">
         <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    Goodbye World
-                </div>
-            </div>
+
+        </div>
+        <div class="footer-copyright grey darken-4">
+            <div class="container center-align">&copy; 2022 Casey Voss</div>
         </div>
     </footer>
 </body>
