@@ -1,3 +1,4 @@
+from operator import truediv
 from django.shortcuts import render, redirect
 import uuid
 from random import randint
@@ -48,6 +49,7 @@ def quiz(request):
 
 def submit_answer(request):
     print('SUBMITTING ANSWER NOW')
+    Question.objects.all().delete()
     currentPersonID = Person.objects.all()[0].id
     form = QuestionForm(request.POST)
     # print(form)
@@ -59,4 +61,12 @@ def submit_answer(request):
     return redirect('results')
 
 def results(request):
-    return render(request, 'results.html')
+    answer = Question.objects.all()[0]
+    currentPerson = Person.objects.all()[0]
+    
+    if answer.option_names == currentPerson.name:
+        win = True
+    else:
+        win = False
+
+    return render(request, 'results.html', {'win': win})
