@@ -16,18 +16,6 @@ shuffle(options)
 
 
 class QuestionForm(ModelForm):
-    
-    #option_names = forms.ChoiceField(choices=[], widget=forms.RadioSelect)
-    # person = Person.objects.all()[0]
-
-    # def __init__(self, options=None, *args, **kwargs):
-    #     super(QuestionForm, self).__init__(*args, **kwargs)
-    #     if options:
-    #         batch = []
-    #         for option in options:
-    #             batch.append(option)
-
-    #         self.fields['option_names'].choices = batch
 
     class Meta:
         model = Question

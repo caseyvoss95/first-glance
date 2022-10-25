@@ -1,17 +1,13 @@
-from operator import truediv
 from django.shortcuts import render, redirect
-from random import randint
-from .models import Person, Question
-from .forms import QuestionForm
-from random import shuffle
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from random import randint
+from random import shuffle
+from .models import Person, Question
+from .forms import QuestionForm
 
-
-
-
-#todo: move me somewhere better
+#assets
 names = ['Dorian', 'Amos', 'Flynn', 'Kori', 'Ellison', 'Harper', 'Wyatt', 'Asher']
 
 images = [
@@ -25,12 +21,9 @@ images = [
     'https://images.generated.photos/isEv8ypmyC47Dzn1WZLaLFGNQ__Zv-ok3SbXPRBIsqw/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTgxNjU0LmpwZw.jpg',
 ]
 
-
 @login_required
 def group_view(request):
-    
     Person.objects.all().delete()
-    
     #create random person with name - todo: iterate for more people!
     randName = names[randint(0,len(names) - 1)]
     randImg = images[randint(0, len(images) - 1)]
@@ -40,18 +33,7 @@ def group_view(request):
 
 @login_required
 def quiz(request):
-    
     currentPerson = Person.objects.all()[0]
-
-    
-    options = [
-    ('0', currentPerson),
-    ('1', 'Larry Voss'),
-    ('2', 'Mickey Narsisian'),
-    ('3', 'Mary Lou')
-]   
-    shuffle(options)
-
     question_form = QuestionForm()
     return render(request, 'person/quiz.html', {'currentPerson': currentPerson, 'question_form' : question_form} )
 
@@ -61,27 +43,22 @@ def submit_answer(request):
     Question.objects.all().delete()
     currentPersonID = Person.objects.all()[0].id
     form = QuestionForm(request.POST)
-    # print(form)
     if form.is_valid:
         new_answer = form.save(commit=False)
         new_answer.person_id = currentPersonID
         new_answer.save()
-
     return redirect('results')
 
 @login_required
 def results(request):
     answer = Question.objects.all()[0]
     currentPerson = Person.objects.all()[0]
-    
     if answer.option_names == currentPerson.name:
         win = True
     else:
         win = False
-
     return render(request, 'results.html', {'win': win})
 
-#special thanks to GA Markdown for this function
 def signup(request):
     error_message = ''
     if request.method == 'POST':
