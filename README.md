@@ -10,6 +10,7 @@ Technologies used
 * Pip
 * PostgreSQL
 * Django-Heroku
+* Materialize
 
 Screenshots
 --
