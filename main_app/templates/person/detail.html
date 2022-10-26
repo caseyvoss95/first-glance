@@ -2,14 +2,18 @@
 
 {% load static %}
 
-<h1>Rember this face.</h1>
+<h1>Rember these faces.</h1>
 
-{% for person in people %}
-<img src="{{ person.imgPath }}" alt="{{ person.name }}">
-<h1>{{ person.name }}</h1>
-{% endfor %}
+<div class="row">
+    {% for person in people %}
+    <div class="col s6">
+    <img src="{{ person.imgPath }}" alt="{{ person.name }}">
+    <h1>{{ person.name }}</h1>
+    </div>
+    {% endfor %}
+</div>
 
-<a href="/quiz" class="btn indigo">BEGIN</a>
+<a href="/quiz/{{ currentId }}/" class="btn indigo">BEGIN</a>
 
 
 {% endblock %}

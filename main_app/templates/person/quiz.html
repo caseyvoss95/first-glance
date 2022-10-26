@@ -4,11 +4,14 @@
 
 <img src="{{ currentPerson.imgPath }}" alt="photo missing, try refreshing">
 
-<form action="{% url 'submit_answer' %}" method="post">
+<form action="{% url 'submit_answer' currentPerson.id %}" method="post">
     {% csrf_token %} {{ question_form.as_p }}
     <input type="submit" value="next">
 </form>
 
+
+<h1>{{ lastId }}</h1>
 {% endblock %}
+
 
 

@@ -16,8 +16,8 @@
 <body>
     <header class="navbar-fixed">
         <nav class="nav-wrapper indigo" role="navigation">
-            <a id="logo-container" href="/" class="brand-logo">First Glance</a>
             <ul class="left">
+                <li><a id="logo-container" href="/" class="brand-logo">First Glance</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'logout' %}">Log Out</a></li>
                 {% else %}

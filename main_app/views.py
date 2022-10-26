@@ -24,40 +24,58 @@ images = [
 @login_required
 def group_view(request):
     Person.objects.all().delete()
-    #create random person with name - todo: iterate for more people!
-    randName = names[randint(0,len(names) - 1)]
-    randImg = images[randint(0, len(images) - 1)]
-    newPerson = Person.objects.create(name=randName, imgPath=randImg)
-    people = Person.objects.all()
-    return render(request, 'person/detail.html', {'people': people} )
-
-@login_required
-def quiz(request):
-    currentPerson = Person.objects.all()[0]
-    question_form = QuestionForm()
-    return render(request, 'person/quiz.html', {'currentPerson': currentPerson, 'question_form' : question_form} )
-
-@login_required
-def submit_answer(request):
-    print('SUBMITTING ANSWER NOW')
     Question.objects.all().delete()
-    currentPersonID = Person.objects.all()[0].id
+    #create 4 random people with random name
+    for idx in range(4):
+        randName = names[randint(0,len(names) - 1)]
+        randImg = images[randint(0, len(images) - 1)]
+        Person.objects.create(name=randName, imgPath=randImg)
+    people = Person.objects.all()
+    currentId = Person.objects.first().id
+
+    return render(request, 'person/detail.html', {'people': people, 'currentId' : currentId} )
+
+@login_required
+def quiz(request, person_id):
+    currentPerson = Person.objects.get(id=person_id)
+    question_form = QuestionForm()
+    nextId = person_id + 1
+    print(f'next_id is {nextId}')
+
+    return render(request, 'person/quiz.html', {'currentPerson': currentPerson, 'question_form' : question_form, 'nextId' : nextId} )
+
+@login_required
+def submit_answer(request, person_id):
+    #checking for last person
+    if person_id == Person.objects.last().id: 
+        lastQuestion = True
+    else:
+        lastQuestion = False
     form = QuestionForm(request.POST)
     if form.is_valid:
         new_answer = form.save(commit=False)
-        new_answer.person_id = currentPersonID
+        new_answer.person_id = person_id
         new_answer.save()
+    if not lastQuestion:
+        return redirect(f'/quiz/{person_id + 1}/' )
     return redirect('results')
 
 @login_required
 def results(request):
-    answer = Question.objects.all()[0]
-    currentPerson = Person.objects.all()[0]
-    if answer.option_names == currentPerson.name:
-        win = True
-    else:
-        win = False
-    return render(request, 'results.html', {'win': win})
+    score = 0
+    firstId = Person.objects.first().id
+    lastId = Person.objects.last().id
+    questionId = Question.objects.first().id
+    for id in range(firstId, lastId + 1):
+        answer = Question.objects.get(id=questionId)
+        person = Person.objects.get(id=id)
+        if answer.option_names == person.name:
+            score += 1
+        questionId += 1
+    return render(request, 'results.html', {'score': score})
+
+    
+
 
 def signup(request):
     error_message = ''
