@@ -6,6 +6,13 @@ name = "pypi"
 [packages]
 django-heroku = "*"
 gunicorn = "*"
+asgiref = "*"
+dj-database-url = "*"
+django = "*"
+psycopg2 = "*"
+psycopg2-binary = "*"
+sqlparse = "*"
+whitenoise = "*"
 
 [dev-packages]
 
