@@ -21,7 +21,7 @@ img {
 
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 993px) {
     #logo-container {
         margin-left: 15px;
     }
