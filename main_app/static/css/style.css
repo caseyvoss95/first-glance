@@ -20,3 +20,9 @@ img {
     max-width: 200px;
 
 }
+
+@media (min-width: 1200px) {
+    #logo-container {
+        margin-left: 15px;
+    }
+}
